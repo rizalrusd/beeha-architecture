@@ -1,0 +1,138 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --hue: 211;
+  --color-primary: hsl(var(--hue), 100%, 47%);
+  --color-primary-light: hsl(var(--hue), 100%, 60%);
+  --color-primary-light-max: hsl(var(--hue), 100%, 96%);
+  --color-black-default: #353935;
+  --color-white-default: #fffafa;
+
+  --font-default: "Montserrat", sans-serif;
+
+  --base-text-size: 16px;
+  --text-scale-ratio: 1.25;
+
+  --text-base: var(--base-text-size);
+
+  --text-sm: calc(var(--text-base) / var(--text-scale-ratio));
+  --text-xs: calc(var(--text-sm) / var(--text-scale-ratio));
+
+  --text-md: calc(var(--text-base) * var(--text-scale-ratio));
+  --text-lg: calc(var(--text-md) * var(--text-scale-ratio));
+  --text-xl: calc(var(--text-lg) * var(--text-scale-ratio));
+  --text-2xl: calc(var(--text-xl) * var(--text-scale-ratio));
+  --text-3xl: calc(var(--text-2xl) * var(--text-scale-ratio));
+  --text-4xl: calc(var(--text-3xl) * var(--text-scale-ratio));
+  --text-5xl: calc(var(--text-4xl) * var(--text-scale-ratio));
+  --text-6xl: calc(var(--text-5xl) * var(--text-scale-ratio));
+
+  --default-spacing: 0.75rem;
+  --m-spacing-2: calc(var(--default-spacing) * 2);
+  --m-spacing-3: calc(var(--default-spacing) * 3);
+  --m-spacing-4: calc(var(--default-spacing) * 4);
+  --m-spacing-5: calc(var(--default-spacing) * 5);
+  --m-spacing-6: calc(var(--default-spacing) * 6);
+  --m-spacing-7: calc(var(--default-spacing) * 7);
+  --m-spacing-8: calc(var(--default-spacing) * 8);
+  --m-spacing-9: calc(var(--default-spacing) * 9);
+  --m-spacing-10: calc(var(--default-spacing) * 10);
+}
+
+* {
+  font-family: var(--font-default);
+  user-select: none;
+}
+
+img {
+  pointer-events: none;
+}
+
+@utility text-base {
+  font-size: var(--text-base);
+}
+
+@utility text-sm {
+  font-size: var(--text-sm);
+}
+
+@utility text-xs {
+  font-size: var(--text-xs);
+}
+
+@utility text-md {
+  font-size: var(--text-md);
+}
+
+@utility text-lg {
+  font-size: var(--text-lg);
+}
+
+@utility text-xl {
+  font-size: var(--text-xl);
+}
+
+@utility text-2xl {
+  font-size: var(--text-2xl);
+}
+
+@utility text-3xl {
+  font-size: var(--text-3xl);
+}
+
+@utility text-4xl {
+  font-size: var(--text-4xl);
+}
+
+@utility text-5xl {
+  font-size: var(--text-5xl);
+}
+
+@utility text-6xl {
+  font-size: var(--text-6xl);
+}
+
+@utility text-secondary {
+  @apply font-light;
+}
+
+@utility rounded-default {
+  @apply rounded-md;
+}
+
+.btn-primary {
+  @apply px-[var(--m-spacing-2)] py-[var(--default-spacing)] bg-gradient-to-br from-primary-light to-primary text-white font-medium cursor-pointer rounded-default hover:brightness-110 duration-300 ease-in-out;
+}
+
+.btn-secondary {
+  @apply px-[var(--m-spacing-2)] py-[var(--default-spacing)] border border-black-default/60 hover:border-black-default cursor-pointer font-medium rounded-default duration-300 ease-in-out;
+}
+
+/* section {
+  @apply max-w-[1440px] mx-auto;
+}
+
+section:not(.hero) {
+  @apply my-[calc(var(--m-spacing-10))];
+} */
+
+section .heading {
+  @apply text-md font-medium;
+}
+
+section .subheading {
+  @apply text-secondary;
+}
+
+.content-heading {
+  @apply text-sm font-medium;
+}
+
+.content-subheading {
+  @apply text-secondary text-sm;
+}
+
+[x-cloak] {
+  display: none !important;
+}

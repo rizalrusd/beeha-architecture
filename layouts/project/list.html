@@ -1,0 +1,20 @@
+{{ define "main" }}
+  <section class="flex flex-wrap gap-8 justify-end">
+    {{ range .Pages }}
+      <a
+        href="{{ .RelPermalink }}"
+        class="flex flex-col gap-2 items-end cursor-pointer group"
+      >
+        <img
+          class="max-h-72 lg:brightness-50 lg:group-hover:brightness-100 duration-700 ease-in-out"
+          src="{{ .Params.thumbnail }}"
+          alt="{{ .Title }}"
+        />
+        <div class="text-right">
+          <h1 class="uppercase">{{ .Title }}</h1>
+          <span class="text-sm">{{ .Params.location }}</span>
+        </div>
+      </a>
+    {{ end }}
+  </section>
+{{ end }}
