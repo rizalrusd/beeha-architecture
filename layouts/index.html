@@ -19,6 +19,7 @@
       <div class="flex justify-end">
         <img
           class="h-full w-auto max-h-[478px] max-w-full"
+          x-on:load="onContentLoaded"
           x-bind:src="selected.thumbnail"
           x-bind:alt="selected.title"
         />
@@ -106,11 +107,16 @@
 
           setTimeout(() => {
             this.selected = houses[idx];
-          }, 1000);
-          setTimeout(() => {
+          }, 700);
+          /*setTimeout(() => {
             contentWrapper.classList.replace("opacity-0", "opacity-100");
             contentWrapper.scrollIntoView({ behavior: "smooth" });
-          }, 1100);
+          }, 1100);*/
+        },
+        onContentLoaded() {
+          const contentWrapper = this.$refs["content-wrapper"];
+          contentWrapper.classList.replace("opacity-0", "opacity-100");
+          contentWrapper.scrollIntoView({ behavior: "smooth" });
         },
       };
     }
