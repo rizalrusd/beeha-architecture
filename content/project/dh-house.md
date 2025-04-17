@@ -8,4 +8,15 @@ introduction: |
 main_task: |
   The main task was to design a simple yet warm living space on a limited site, optimizing natural ventilation and daylight. The house was envisioned as a calm retreat that balances privacy and openness, with an emphasis on spatial flow and honest material expression.
 thumbnail: "/images/houses/dh-house/01.jpg"
+additional_info:
+  - name: Land Area
+    value: 200 m²
+  - name: Building Area
+    value: 180 m²
+  - name: Location
+    value: Sleman, Yogyakarta
+  - name: Number of Floors
+    value: 2
+  - name: Site Context
+    value: Suburban residential
 ---

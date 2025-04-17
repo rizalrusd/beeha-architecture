@@ -8,4 +8,15 @@ introduction: |
 main_task: |
   The main task was to design a low-rise dwelling that blends into its landscape, using natural materials and diffused lighting. The design focuses on slowing down movement and reinforcing daily rituals through spatial rhythm.
 thumbnail: "/images/houses/bi-house/01.jpg"
+additional_info:
+  - name: Land Area
+    value: 300 m²
+  - name: Building Area
+    value: 290 m²
+  - name: Location
+    value: Malang, East Java
+  - name: Completion Year
+    value: 2021
+  - name: Floors
+    value: 2.5
 ---
