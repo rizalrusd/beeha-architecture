@@ -1,7 +1,7 @@
 {{ define "main" }}
   <section x-data="housesPreview()" class="flex flex-col lg:gap-24">
     <div class="flex flex-col gap-12 md:max-w-[80%] lg:max-w-[50%]">
-      <div class="flex flex-wrap gap-4" x-init="console.log(houses)">
+      <div class="flex flex-wrap gap-4">
         <template x-for="(house, idx) in houses" :key="house.id">
           <button
             x-on:click="changeContent(idx)"
@@ -104,8 +104,10 @@
       );
       return {
         selected: houses[0],
+        isInit: true,
         houses,
         changeContent(idx) {
+          if (this.isInit) this.isInit = false;
           const contentWrapper = this.$refs["content-wrapper"];
           contentWrapper.classList.replace("opacity-100", "opacity-0");
 
@@ -116,7 +118,8 @@
         onContentLoaded() {
           const contentWrapper = this.$refs["content-wrapper"];
           contentWrapper.classList.replace("opacity-0", "opacity-100");
-          contentWrapper.scrollIntoView({ behavior: "smooth" });
+          if (!this.isInit)
+            contentWrapper.scrollIntoView({ behavior: "smooth" });
         },
       };
     }
