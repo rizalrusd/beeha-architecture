@@ -1,11 +1,17 @@
 {{ define "main" }}
-  <section x-data="housesPreview()" class="flex flex-col lg:gap-24">
+  <section
+    x-data="housesPreview()"
+    x-init="init()"
+    class="flex flex-col lg:gap-24"
+  >
     <div class="flex flex-col gap-12 md:max-w-[80%] lg:max-w-[50%]">
       <div class="flex flex-wrap gap-4">
         <template x-for="(house, idx) in houses" :key="house.id">
           <button
+            x-bind:disabled="selectedIdx === idx"
             x-on:click="changeContent(idx)"
-            class="cursor-pointer hover:underline underline-offset-2"
+            class="not-disabled:cursor-pointer not-disabled:hover:underline underline-offset-2"
+            x-bind:class="selectedIdx === idx && 'opacity-40'"
           >
             <span x-text="house.title"></span>
           </button>
@@ -33,10 +39,10 @@
           <h1 class="heading uppercase" x-text="selected.title"></h1>
           <a
             x-bind:href="selected.url"
-            class="p-1 flex items-center justify-center cursor-pointer"
+            class="p-1 flex items-center justify-center cursor-pointer group duration-700 ease-in-out"
           >
             <svg
-              class="-rotate-35"
+              class="-rotate-35 group-hover:-rotate-0 transition-transform"
               xmlns="http://www.w3.org/2000/svg"
               width="18"
               height="18"
@@ -103,16 +109,21 @@
         document.getElementById("product-data").textContent,
       );
       return {
-        selected: houses[0],
+        selectedIdx: 0,
+        selected: null,
         isInit: true,
         houses,
+        init() {
+          this.selected = houses[this.selectedIdx];
+        },
         changeContent(idx) {
           if (this.isInit) this.isInit = false;
           const contentWrapper = this.$refs["content-wrapper"];
           contentWrapper.classList.replace("opacity-100", "opacity-0");
 
           setTimeout(() => {
-            this.selected = houses[idx];
+            this.selectedIdx = idx;
+            this.selected = houses[this.selectedIdx];
           }, 700);
         },
         onContentLoaded() {

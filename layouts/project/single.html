@@ -33,7 +33,9 @@
     </div>
     <div class="flex flex-col justify-between items-center gap-8">
       {{ with .Prev }}
-        <div class="flex flex-col gap-2 w-full text-right">
+        <div
+          class="flex flex-col gap-2 w-full text-right hover:-translate-x-1 duration-300 ease-in-out"
+        >
           <span class="text-xs">Next</span>
           <a class="uppercase text-sm" href="{{ .RelPermalink }}"
             >{{ .Title }}</a
@@ -42,7 +44,9 @@
       {{ end }}
 
       {{ with .Next }}
-        <div class="flex flex-col gap-2 w-full">
+        <div
+          class="flex flex-col gap-2 w-full hover:translate-x-1 duration-300 ease-in-out"
+        >
           <span class="text-xs">Previous</span>
           <a class="uppercase text-sm" href="{{ .RelPermalink }}"
             >{{ .Title }}</a
