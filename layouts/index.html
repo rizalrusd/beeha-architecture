@@ -31,7 +31,10 @@
           class="flex justify-between items-center lg:justify-normal lg:gap-8"
         >
           <h1 class="heading uppercase" x-text="selected.title"></h1>
-          <button class="p-1 flex items-center justify-center cursor-pointer">
+          <a
+            x-bind:href="selected.url"
+            class="p-1 flex items-center justify-center cursor-pointer"
+          >
             <svg
               class="-rotate-35"
               xmlns="http://www.w3.org/2000/svg"
@@ -48,7 +51,7 @@
                 d="M4 12h16m0 0l-6-6m6 6l-6 6"
               />
             </svg>
-          </button>
+          </a>
         </div>
         <div
           class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 lg:max-w-[70%] gap-8"
@@ -84,6 +87,7 @@
         {{- range $index, $page := $pages -}}
             {
                 "id": {{ $index }},
+                "url": {{ $page.RelPermalink }},
                 "title": {{ $page.Title }},
                 "introduction": {{ $page.Params.introduction }},
                 "project_focus": {{ $page.Params.main_task }},
@@ -108,10 +112,6 @@
           setTimeout(() => {
             this.selected = houses[idx];
           }, 700);
-          /*setTimeout(() => {
-            contentWrapper.classList.replace("opacity-0", "opacity-100");
-            contentWrapper.scrollIntoView({ behavior: "smooth" });
-          }, 1100);*/
         },
         onContentLoaded() {
           const contentWrapper = this.$refs["content-wrapper"];

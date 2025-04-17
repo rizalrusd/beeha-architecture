@@ -1,0 +1,60 @@
+{{ define "main" }}
+  <section class="flex flex-col gap-24">
+    <div class="flex flex-col gap-8 md:max-w-[520px] md:mx-auto">
+      <div class="uppercase flex flex-col gap-2">
+        <span class="text-sm">About</span>
+        <h1>Beeha architecture</h1>
+      </div>
+      <p>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Temporibus
+        ullam explicabo itaque expedita omnis molestiae dolor, ab, fugiat
+        consequuntur eveniet fuga aspernatur esse in! Consequuntur, architecto
+        veniam tempore, consectetur, delectus velit sed quod sint commodi
+        numquam quidem! Aliquid, tenetur illum.
+      </p>
+      <button class="border p-4 border-black-default/60">Get in touch</button>
+    </div>
+    <div class="flex flex-col gap-4">
+      <div class="flex justify-between">
+        <h1 class="heading uppercase">Beeha Teams</h1>
+        <span class="flex items-center gap-2 md:hidden"
+          >scroll
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M4 12h16m0 0l-6-6m6 6l-6 6"
+            />
+          </svg>
+        </span>
+      </div>
+      <div class="overflow-x-auto md:overflow-visible">
+        <div class="flex gap-4 md:grid md:grid-cols-2 lg:grid-cols-3">
+          <img
+            class="aspect-[5/6] object-cover"
+            src="https://images.pexels.com/photos/31661325/pexels-photo-31661325/free-photo-of-confident-businessman-in-modern-office-setting.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            alt=""
+          />
+          <img
+            class="aspect-[5/6] object-cover"
+            src="https://placehold.co/520x520"
+            alt=""
+          />
+          <img
+            class="aspect-[5/6] object-cover"
+            src="https://placehold.co/520x520"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+{{ end }}
