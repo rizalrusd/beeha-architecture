@@ -88,7 +88,7 @@
   {{- $limit := 14 -}}
   {{- $pages := first $limit (where .Site.RegularPages "Section" "project") -}}
   {{- $length := len $pages -}}
-    <script id="product-data" type="application/json">
+    <script id="data" type="application/json">
         [
         {{- range $index, $page := $pages -}}
             {
@@ -97,7 +97,7 @@
                 "title": {{ $page.Title }},
                 "introduction": {{ $page.Params.introduction }},
                 "project_focus": {{ $page.Params.main_task }},
-                "thumbnail": {{ $page.Params.thumbnail }}
+                "thumbnail": {{ index $page.Params.images 0 }}
             }{{ if ne (add $index 1) $length }},{{ end }}
         {{- end -}}
         ]
@@ -105,9 +105,7 @@
 
   <script>
     function housesPreview() {
-      const houses = JSON.parse(
-        document.getElementById("product-data").textContent,
-      );
+      const houses = JSON.parse(document.getElementById("data").textContent);
       return {
         selectedIdx: 0,
         selected: null,

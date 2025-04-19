@@ -8,6 +8,7 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
+    --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
     --text-xs: calc(var(--text-sm) / var(--text-scale-ratio));
@@ -213,8 +214,14 @@
   .pointer-events-none {
     pointer-events: none;
   }
+  .absolute {
+    position: absolute;
+  }
   .fixed {
     position: fixed;
+  }
+  .relative {
+    position: relative;
   }
   .inset-0 {
     inset: calc(var(--spacing) * 0);
@@ -288,6 +295,9 @@
   .h-\[calc\(100vh-20rem\)\] {
     height: calc(100vh - 20rem);
   }
+  .h-auto {
+    height: auto;
+  }
   .h-full {
     height: 100%;
   }
@@ -356,6 +366,9 @@
   }
   .-rotate-35 {
     rotate: calc(35deg * -1);
+  }
+  .rotate-180 {
+    rotate: 180deg;
   }
   .cursor-pointer {
     cursor: pointer;
@@ -436,6 +449,9 @@
       border-color: color-mix(in oklab, var(--color-black-default) 60%, transparent);
     }
   }
+  .bg-black {
+    background-color: var(--color-black);
+  }
   .bg-white-default {
     background-color: var(--color-white-default);
   }
@@ -450,6 +466,24 @@
   .to-primary {
     --tw-gradient-to: var(--color-primary);
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+  .fill-white {
+    fill: var(--color-white);
+  }
+  .fill-white-default {
+    fill: var(--color-white-default);
+  }
+  .stroke-white {
+    stroke: var(--color-white);
+  }
+  .stroke-white-default {
+    stroke: var(--color-white-default);
+  }
+  .stroke-2 {
+    stroke-width: 2;
+  }
+  .stroke-3 {
+    stroke-width: 3;
   }
   .object-cover {
     object-fit: cover;
@@ -607,6 +641,9 @@
   .opacity-0 {
     opacity: 0%;
   }
+  .opacity-20 {
+    opacity: 20%;
+  }
   .opacity-40 {
     opacity: 40%;
   }
@@ -631,6 +668,10 @@
   .duration-300 {
     --tw-duration: 300ms;
     transition-duration: 300ms;
+  }
+  .duration-500 {
+    --tw-duration: 500ms;
+    transition-duration: 500ms;
   }
   .duration-700 {
     --tw-duration: 700ms;
@@ -931,6 +972,16 @@
       gap: calc(var(--spacing) * 24);
     }
   }
+  .lg\:p-2 {
+    @media (width >= 64rem) {
+      padding: calc(var(--spacing) * 2);
+    }
+  }
+  .lg\:opacity-20 {
+    @media (width >= 64rem) {
+      opacity: 20%;
+    }
+  }
   .lg\:brightness-50 {
     @media (width >= 64rem) {
       --tw-brightness: brightness(50%);
@@ -943,6 +994,15 @@
         @media (hover: hover) {
           --tw-brightness: brightness(100%);
           filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
+        }
+      }
+    }
+  }
+  .lg\:hover\:opacity-100 {
+    @media (width >= 64rem) {
+      &:hover {
+        @media (hover: hover) {
+          opacity: 100%;
         }
       }
     }

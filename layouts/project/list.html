@@ -7,7 +7,7 @@
       >
         <img
           class="max-h-72 lg:brightness-50 lg:group-hover:brightness-100 duration-700 ease-in-out"
-          src="{{ .Params.thumbnail }}"
+          src="{{ index .Params.images 0 }}"
           alt="{{ .Title }}"
         />
         <div class="text-right">

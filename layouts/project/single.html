@@ -2,8 +2,65 @@
   <section
     class="flex flex-col gap-12 lg:gap-20 md:w-[70%] mx-auto max-w-[1024px]"
   >
-    <div>
-      <img src="{{ .Params.thumbnail }}" alt="{{ .Title }}" />
+    <div
+      x-ref="content-wrapper"
+      x-cloak
+      x-data="imagePreviewer()"
+      x-init="init()"
+      class="relative opacity-0 duration-700 ease-in-out"
+    >
+      <img
+        class="w-full h-auto"
+        x-bind:src="selected"
+        alt="{{ .Title }}"
+        x-on:load="onContentLoaded"
+      />
+      <div class="absolute inset-0 flex items-center justify-between lg:p-2">
+        <button
+          x-on:click="changeContent(-1)"
+          x-bind:disabled="onLoad"
+          class="lg:opacity-20 lg:hover:opacity-100 duration-500 ease-in-out cursor-pointer p-2 rounded-md"
+        >
+          <svg
+            class="stroke-white-default rotate-180 stroke-2"
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="none"
+              stroke="current"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="current"
+              d="M4 12h16m0 0l-6-6m6 6l-6 6"
+            />
+          </svg>
+        </button>
+        <button
+          x-on:click="changeContent(1)"
+          x-bind:disabled="onLoad"
+          class="lg:opacity-20 lg:hover:opacity-100 duration-500 ease-in-out cursor-pointer p-2 rounded-md"
+        >
+          <svg
+            class="stroke-white-default stroke-2"
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="none"
+              stroke="current"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="current"
+              d="M4 12h16m0 0l-6-6m6 6l-6 6"
+            />
+          </svg>
+        </button>
+      </div>
     </div>
     <div class="flex flex-col gap-8 max-w-[560px]">
       <div class="flex flex-col gap-2">
@@ -55,4 +112,54 @@
       {{ end }}
     </div>
   </section>
+{{ end }}
+
+{{ define "script" }}
+  <script id="data-images" type="application/json">
+    {
+      "images": {{ .Params.images }}
+    }
+  </script>
+  <script>
+    function imagePreviewer() {
+      const data = JSON.parse(
+        document.getElementById("data-images").textContent,
+      );
+      return {
+        selectedIdx: 0,
+        selected: null,
+        images: null,
+        onLoad: false,
+        autoNext: null,
+        init() {
+          this.images = data.images;
+          this.selected = this.images[this.selectedIdx];
+        },
+        changeContent(idx) {
+          clearInterval(this.autoNext);
+          this.onLoad = true;
+          const contentWrapper = this.$refs["content-wrapper"];
+          contentWrapper.classList.replace("opacity-100", "opacity-0");
+
+          setTimeout(() => {
+            this.selectedIdx =
+              idx > 0
+                ? (this.selectedIdx + 1) % this.images.length
+                : (this.selectedIdx - 1 + this.images.length) %
+                  this.images.length;
+            console.log(this.selectedIdx);
+            this.selected = this.images[this.selectedIdx];
+          }, 700);
+        },
+        onContentLoaded() {
+          const contentWrapper = this.$refs["content-wrapper"];
+          contentWrapper.classList.replace("opacity-0", "opacity-100");
+          setTimeout(() => {
+            this.onLoad = false;
+            this.autoNext = setInterval(() => this.changeContent(1), 6000);
+          }, 1000);
+        },
+      };
+    }
+  </script>
 {{ end }}

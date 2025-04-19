@@ -7,7 +7,18 @@ introduction: |
   Dh House is a compact residential project located in a suburban area, designed to accommodate a small family's daily life with comfort and clarity. The concept explores how a modest structure can still offer serenity and a strong connection to nature through proportion, material, and light.
 main_task: |
   The main task was to design a simple yet warm living space on a limited site, optimizing natural ventilation and daylight. The house was envisioned as a calm retreat that balances privacy and openness, with an emphasis on spatial flow and honest material expression.
-thumbnail: "/images/houses/dh-house/01.jpg"
+images:
+  - "/images/houses/dh-house/01.jpg"
+  - "/images/houses/dh-house/02.jpg"
+  - "/images/houses/dh-house/03.jpg"
+  - "/images/houses/dh-house/04.jpg"
+  - "/images/houses/dh-house/05.jpg"
+  - "/images/houses/dh-house/06.jpg"
+  - "/images/houses/dh-house/07.jpg"
+  - "/images/houses/dh-house/08.jpg"
+  - "/images/houses/dh-house/09.jpg"
+  - "/images/houses/dh-house/10.jpg"
+  - "/images/houses/dh-house/11.jpg"
 additional_info:
   - name: Land Area
     value: 200 m²
