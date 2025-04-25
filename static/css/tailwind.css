@@ -1,12 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   --hue: 211;
   --color-primary: hsl(var(--hue), 100%, 47%);
   --color-primary-light: hsl(var(--hue), 100%, 60%);
   --color-primary-light-max: hsl(var(--hue), 100%, 96%);
-  --color-black-default: #353935;
+  --color-black-default: #1b1b1b;
   --color-white-default: #fffafa;
 
   --font-default: "Montserrat", sans-serif;
@@ -106,7 +107,7 @@ img {
 }
 
 .btn-secondary {
-  @apply px-[var(--m-spacing-2)] py-[var(--default-spacing)] border border-black-default/60 hover:border-black-default cursor-pointer font-medium rounded-default duration-300 ease-in-out;
+  @apply px-[var(--m-spacing-2)] py-[var(--default-spacing)] border border-white-default/60 hover:border-white-default cursor-pointer font-medium rounded-default duration-300 ease-in-out;
 }
 
 /* section {

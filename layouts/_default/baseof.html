@@ -3,14 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ .Title }} — Behaa Architecture</title>
+    <title>{{ .Title }} — Behaa Studio</title>
     <link rel="stylesheet" href="/css/styles.css" />
     <script
       defer
       src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
     ></script>
   </head>
-  <body class="text-black-default bg-white-default">
+  <body
+    x-data
+    x-cloak
+    class="text-black-default dark:text-white-default fill-black-default dark:fill-white-default stroke-black-default dark:stroke-white-default bg-white-default dark:bg-black-default"
+    x-bind:class="$store.darkMode.on && 'dark' "
+  >
     {{ partial "navbar" . }}
     <main class="pt-[5rem] p-8">
       {{ block "main" . }}
@@ -21,5 +26,17 @@
     {{ block "script" . }}
     {{ end }}
     <script src="{{ `/js/navbar.js` | relURL }}"></script>
+    <script>
+      document.addEventListener("alpine:init", () => {
+        Alpine.store("darkMode", {
+          on: JSON.parse(localStorage.getItem("darkMode")) ?? true,
+
+          toggle() {
+            this.on = !this.on;
+            localStorage.setItem("darkMode", JSON.stringify(this.on));
+          },
+        });
+      });
+    </script>
   </body>
 </html>
