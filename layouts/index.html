@@ -4,7 +4,11 @@
       x-ref="splashscreen"
       class="bg-black-default fixed inset-0 opacity-0 duration-1000 ease-in-out z-10"
     ></div>
-    <img class="fixed inset-0 w-full h-full object-cover" x-ref="slide" />
+    <img
+      x-on:load="onContentLoaded()"
+      class="fixed inset-0 w-full h-full object-cover"
+      x-ref="slide"
+    />
   </section>
 {{ end }}
 
@@ -42,11 +46,15 @@
 
               this.$refs.slide.src = this.images[this.currentIndex];
               this.$refs.slide.alt = this.images[this.currentIndex];
-              splash.classList.replace("opacity-100", "opacity-0");
-              setTimeout(() => {
-                this.slideshow();
-              }, this.interval);
             }, 1000);
+          }, this.interval);
+        },
+
+        onContentLoaded() {
+          const splash = this.$refs.splashscreen;
+          splash.classList.replace("opacity-100", "opacity-0");
+          setTimeout(() => {
+            this.slideshow();
           }, this.interval);
         },
       }));
