@@ -1,127 +1,142 @@
 <header x-data="navbar()" class="fixed top-0 left-0 right-0 z-50">
   <nav
-    class="flex justify-between items-center bg-white-default dark:bg-black-default p-8 py-6"
+    class="flex justify-between items-center p-8 py-6 {{ if .IsHome }}
+      bg-transparent
+    {{ else }}
+      bg-white-default dark:bg-black-default
+    {{ end }}"
   >
     <div>
-      <a href="/"
+      <a href="/home"
         ><img
           x-data
           class="w-12 opacity-60"
           alt="beeha's logo"
-          x-bind:src="$store.darkMode.on ? '/images/logo-dark.png' : '/images/logo.png' "
+          {{ if .IsHome }}
+            x-bind:src="'/images/logo-dark.png'"
+          {{ else }}
+            x-bind:src="$store.darkMode.on ? '/images/logo-dark.png' :
+            '/images/logo.png' "
+          {{ end }}
       /></a>
     </div>
-    <div class="flex items-center flex-row-reverse sm:flex-row gap-4 sm:gap-12">
-      <div class="sm:hidden">
-        <button
-          class="p-1 rounded-md flex items-center justify-center"
-          x-cloak
-          x-on:click="toggle()"
-        >
+    {{ if not .IsHome }}
+      <div
+        class="flex items-center flex-row-reverse sm:flex-row gap-4 sm:gap-12"
+      >
+        <div class="sm:hidden">
+          <button
+            class="p-1 rounded-md flex items-center justify-center"
+            x-cloak
+            x-on:click="toggle()"
+          >
+            <svg
+              x-bind:class="isOpen && 'hidden'"
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M4 8.5h16m-16 7h16"
+                color="currentColor"
+              />
+            </svg>
+            <svg
+              x-bind:class="!isOpen && 'hidden'"
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="currentColor"
+                d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12z"
+              />
+            </svg>
+          </button>
+        </div>
+        <ul class="sm:flex gap-6 hidden text-sm">
+          <li>
+            <a class="hover:underline underline-offset-2" href="/project"
+              >Project</a
+            >
+          </li>
+          <li>
+            <a class="hover:underline underline-offset-2" href="/profile"
+              >Profile</a
+            >
+          </li>
+          <li>
+            <a class="hover:underline underline-offset-2" href="/contact"
+              >Contact</a
+            >
+          </li>
+        </ul>
+        <button class="cursor-pointer" x-on:click="$store.darkMode.toggle()">
           <svg
-            x-bind:class="isOpen && 'hidden'"
+            class="dark:hidden"
             xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
+            width="18px"
+            height="18px"
             viewBox="0 0 24 24"
           >
             <path
               fill="none"
-              stroke="currentColor"
+              stroke="current"
               stroke-linecap="round"
               stroke-linejoin="round"
-              stroke-width="1.5"
-              d="M4 8.5h16m-16 7h16"
-              color="currentColor"
+              stroke-width="2"
+              d="M3 11.507a9.493 9.493 0 0 0 18 4.219c-8.507 0-12.726-4.22-12.726-12.726A9.49 9.49 0 0 0 3 11.507"
             />
           </svg>
           <svg
-            x-bind:class="!isOpen && 'hidden'"
+            class="not-dark:hidden"
             xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
+            width="18px"
+            height="18px"
             viewBox="0 0 24 24"
           >
-            <path
-              fill="currentColor"
-              d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12z"
-            />
+            <g
+              fill="none"
+              stroke="current"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path
+                d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"
+              />
+            </g>
           </svg>
         </button>
       </div>
-      <ul class="sm:flex gap-6 hidden text-sm">
-        <li>
-          <a class="hover:underline underline-offset-2" href="/project"
-            >Project</a
-          >
-        </li>
-        <li>
-          <a class="hover:underline underline-offset-2" href="/profile"
-            >Profile</a
-          >
-        </li>
-        <li>
-          <a class="hover:underline underline-offset-2" href="/contact"
-            >Contact</a
-          >
-        </li>
-      </ul>
-      <button class="cursor-pointer" x-on:click="$store.darkMode.toggle()">
-        <svg
-          class="dark:hidden"
-          xmlns="http://www.w3.org/2000/svg"
-          width="18px"
-          height="18px"
-          viewBox="0 0 24 24"
-        >
-          <path
-            fill="none"
-            stroke="current"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M3 11.507a9.493 9.493 0 0 0 18 4.219c-8.507 0-12.726-4.22-12.726-12.726A9.49 9.49 0 0 0 3 11.507"
-          />
-        </svg>
-        <svg
-          class="not-dark:hidden"
-          xmlns="http://www.w3.org/2000/svg"
-          width="18px"
-          height="18px"
-          viewBox="0 0 24 24"
-        >
-          <g
-            fill="none"
-            stroke="current"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-          >
-            <circle cx="12" cy="12" r="4" />
-            <path
-              d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"
-            />
-          </g>
-        </svg>
-      </button>
-    </div>
+    {{ end }}
   </nav>
 
-  <div
-    x-cloak
-    class="bg-white-default dark:bg-black-default fixed pt-[5rem] inset-0 px-8 duration-700 ease-in-out -z-10 sm:hidden"
-    x-bind:class="isOpen ? 'opacity-100 pointer-events-auto':'opacity-0 pointer-events-none'"
-  >
-    <ul class="flex flex-col gap-6 text-sm">
-      <li>
-        <a href="/project">Project</a>
-      </li>
-      <li>
-        <a href="/profile">Profile</a>
-      </li>
-      <li>
-        <a href="/contact">Contact</a>
-      </li>
-    </ul>
-  </div>
+  {{ if not .IsHome }}
+    <div
+      x-cloak
+      class="bg-white-default dark:bg-black-default fixed pt-[5rem] inset-0 px-8 duration-700 ease-in-out -z-10 sm:hidden"
+      x-bind:class="isOpen ? 'opacity-100 pointer-events-auto':'opacity-0 pointer-events-none'"
+    >
+      <ul class="flex flex-col gap-6 text-sm">
+        <li>
+          <a href="/project">Project</a>
+        </li>
+        <li>
+          <a href="/profile">Profile</a>
+        </li>
+        <li>
+          <a href="/contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+  {{ end }}
 </header>

@@ -5,11 +5,33 @@ local_backend: true # run npx netlify-cms-proxy-server for local testing
 media_folder: static/uploads
 public_folder: /uploads
 collections:
-  - name: "writing"
-    label: "Writing"
-    folder: "content/writing"
+  - name: "homepage"
+    label: "Homepage"
+    files:
+      - label: "Slideshow"
+        name: "slideshow"
+        file: "content/_index.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - {
+              label: "Date",
+              name: "date",
+              widget: "datetime",
+              format: "YYYY-MM-DDTHH:mm:ssZ",
+            }
+          - { label: "Draft", name: "draft", widget: "boolean" }
+          - {
+              label: "Highlight Images",
+              name: "highlight",
+              widget: "list",
+              field: { label: "Image", name: "image", widget: "image" },
+            }
+
+  - name: "project"
+    label: "Projects"
+    folder: "content/project"
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    slug: "{{slug}}"
     editor:
       preview: true
     fields:
@@ -18,28 +40,77 @@ collections:
           label: "Date",
           name: "date",
           widget: "datetime",
-          default: "{{now}}",
-          format: "YYYY-MM-DD",
-          timeFormat: false,
+          format: "YYYY-MM-DDTHH:mm:ssZ",
         }
       - { label: "Draft", name: "draft", widget: "boolean" }
+      - { label: "Location", name: "location", widget: "string" }
+      - { label: "Introduction", name: "introduction", widget: "text" }
+      - { label: "Main Task", name: "main_task", widget: "text" }
       - {
-          label: "Tag",
-          name: "tags",
-          widget: "select",
-          options: ["technology", "digital marketing", "lifestyle"],
+          label: "Images",
+          name: "images",
+          widget: "list",
+          field: { label: "Image", name: "image", widget: "image" },
         }
-      - { label: "Image", name: "image", widget: "file" }
-      - { label: "Body", name: "body", widget: "markdown" }
-  - name: "blog"
-    label: "Blog"
-    folder: "content/blog"
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    editor:
-      preview: false
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Description", name: "description", widget: "string" }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - label: "Additional Info"
+        name: "additional_info"
+        widget: "list"
+        fields:
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Value", name: "value", widget: "string" }
+
+  - name: "profile"
+    label: "Profile"
+    files:
+      - name: "profile"
+        label: "Profile"
+        file: "content/profile/_index.md"
+        editor:
+          preview: true
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - {
+              label: "Date",
+              name: "date",
+              widget: "datetime",
+              format: "YYYY-MM-DDTHH:mm:ssZ",
+            }
+          - { label: "Draft", name: "draft", widget: "boolean" }
+          - label: "About"
+            name: "about"
+            widget: "text"
+          - label: "Teams"
+            name: "teams"
+            widget: "list"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Role", name: "role", widget: "string" }
+              - { label: "Picture", name: "pict", widget: "image" }
+
+  - name: "contact"
+    label: "Contact"
+    files:
+      - name: "contact"
+        label: "Contact"
+        file: "content/contact/_index.md"
+        editor:
+          preview: true
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - {
+              label: "Date",
+              name: "date",
+              widget: "datetime",
+              format: "YYYY-MM-DDTHH:mm:ssZ",
+            }
+          - { label: "Draft", name: "draft", widget: "boolean" }
+          - { label: "Map URL", name: "map_url", widget: "string" }
+          - { label: "Address 1", name: "address_1", widget: "string" }
+          - { label: "Address 2", name: "address_2", widget: "string" }
+          - { label: "Address 3", name: "address_3", widget: "string" }
+          - label: "Additional Info"
+            name: "additional_info"
+            widget: "list"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Value", name: "value", widget: "string" }

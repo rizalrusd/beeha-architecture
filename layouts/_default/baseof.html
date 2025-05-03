@@ -21,7 +21,9 @@
       {{ block "main" . }}
       {{ end }}
     </main>
-    {{ partial "footer" . }}
+    {{ if not .IsHome }}
+      {{ partial "footer" . }}
+    {{ end }}
 
     {{ block "script" . }}
     {{ end }}

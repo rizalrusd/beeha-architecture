@@ -1,136 +1,55 @@
 {{ define "main" }}
-  <section
-    x-data="housesPreview()"
-    x-init="init()"
-    class="flex flex-col lg:gap-24"
-  >
-    <div class="flex flex-col gap-12 md:max-w-[80%] lg:max-w-[50%]">
-      <div class="flex flex-wrap gap-4">
-        <template x-for="(house, idx) in houses" :key="house.id">
-          <button
-            x-bind:disabled="selectedIdx === idx"
-            x-on:click="changeContent(idx)"
-            class="not-disabled:cursor-pointer not-disabled:hover:underline underline-offset-2"
-            x-bind:class="selectedIdx === idx && 'opacity-40'"
-          >
-            <span x-text="house.title"></span>
-          </button>
-        </template>
-      </div>
-    </div>
+  <section x-data="slideshow">
     <div
-      x-ref="content-wrapper"
-      class="flex flex-col lg:flex-row-reverse lg:items-end gap-12 duration-700 ease-in-out opacity-100 pt-20"
-    >
-      <div class="flex justify-end">
-        <img
-          class="h-full w-auto max-h-[478px] max-w-full"
-          x-on:load="onContentLoaded"
-          x-bind:src="selected.thumbnail"
-          x-bind:alt="selected.title"
-        />
-      </div>
-      <div
-        class="flex flex-col lg:justify-between gap-8 sm:max-w-[90%] lg:max-w-[50%] mx-auto lg:mx-0"
-      >
-        <div
-          class="flex justify-between items-center lg:justify-normal lg:gap-8"
-        >
-          <h1 class="heading uppercase" x-text="selected.title"></h1>
-          <a
-            x-bind:href="selected.url"
-            class="p-1 flex items-center justify-center cursor-pointer group duration-700 ease-in-out"
-          >
-            <svg
-              class="-rotate-35 group-hover:-rotate-0 transition-transform"
-              xmlns="http://www.w3.org/2000/svg"
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.5"
-                d="M4 12h16m0 0l-6-6m6 6l-6 6"
-              />
-            </svg>
-          </a>
-        </div>
-        <div
-          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 lg:max-w-[70%] gap-8"
-        >
-          <div class="flex flex-col gap-2">
-            <h1 class="content-subheading !font-medium uppercase">
-              Introduction
-            </h1>
-            <p
-              class="content-subheading max-w-[70%] lg:max-w-max"
-              x-text="selected.introduction"
-            ></p>
-          </div>
-          <div class="flex flex-col gap-2">
-            <h1 class="content-heading uppercase">Project Focus</h1>
-            <p
-              class="content-subheading max-w-[70%] lg:max-w-max"
-              x-text="selected.project_focus"
-            ></p>
-          </div>
-        </div>
-      </div>
-    </div>
+      x-ref="splashscreen"
+      class="bg-black-default fixed inset-0 opacity-0 duration-1000 ease-in-out z-10"
+    ></div>
+    <img class="fixed inset-0 w-full h-full object-cover" x-ref="slide" />
   </section>
 {{ end }}
 
 {{ define "script" }}
-  {{- $limit := 14 -}}
-  {{- $pages := first $limit (where .Site.RegularPages "Section" "project") -}}
-  {{- $length := len $pages -}}
-    <script id="data" type="application/json">
-        [
-        {{- range $index, $page := $pages -}}
-            {
-                "id": {{ $index }},
-                "url": {{ $page.RelPermalink }},
-                "title": {{ $page.Title }},
-                "introduction": {{ $page.Params.introduction }},
-                "project_focus": {{ $page.Params.main_task }},
-                "thumbnail": {{ index $page.Params.images 0 }}
-            }{{ if ne (add $index 1) $length }},{{ end }}
-        {{- end -}}
-        ]
-    </script>
-
+  {{ $highlight := .Params.highlight }}
+  <script id="data" type="application/json">
+    [
+      {{range $index, $slides := $highlight}}
+        {{ $slides }} {{ if ne (add $index 1) (len $highlight) }},{{ end }}
+      {{end}}
+    ]
+  </script>
   <script>
-    function housesPreview() {
-      const houses = JSON.parse(document.getElementById("data").textContent);
-      return {
-        selectedIdx: 0,
-        selected: null,
-        isInit: true,
-        houses,
+    document.addEventListener("alpine:init", () => {
+      Alpine.data("slideshow", () => ({
+        images: JSON.parse(document.getElementById("data").textContent),
+        currentIndex: 0,
+        interval: 8000,
         init() {
-          this.selected = houses[this.selectedIdx];
-        },
-        changeContent(idx) {
-          if (this.isInit) this.isInit = false;
-          const contentWrapper = this.$refs["content-wrapper"];
-          contentWrapper.classList.replace("opacity-100", "opacity-0");
+          this.$refs.slide.src = this.images[this.currentIndex];
+          this.$refs.slide.alt = this.images[this.currentIndex];
 
+          this.slideshow();
+        },
+
+        slideshow() {
+          const splash = this.$refs.splashscreen;
           setTimeout(() => {
-            this.selectedIdx = idx;
-            this.selected = houses[this.selectedIdx];
-          }, 700);
+            splash.classList.replace("opacity-0", "opacity-100");
+            setTimeout(() => {
+              this.currentIndex =
+                this.currentIndex == this.images.length - 1
+                  ? 0
+                  : this.currentIndex + 1;
+
+              this.$refs.slide.src = this.images[this.currentIndex];
+              this.$refs.slide.alt = this.images[this.currentIndex];
+              splash.classList.replace("opacity-100", "opacity-0");
+              setTimeout(() => {
+                this.slideshow();
+              }, this.interval);
+            }, 1000);
+          }, this.interval);
         },
-        onContentLoaded() {
-          const contentWrapper = this.$refs["content-wrapper"];
-          contentWrapper.classList.replace("opacity-0", "opacity-100");
-          if (!this.isInit)
-            contentWrapper.scrollIntoView({ behavior: "smooth" });
-        },
-      };
-    }
+      }));
+    });
   </script>
 {{ end }}

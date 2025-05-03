@@ -137,3 +137,7 @@ section .subheading {
 [x-cloak] {
   display: none !important;
 }
+
+.no-scroll::-webkit-scrollbar {
+  display: none;
+}
