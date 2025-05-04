@@ -10,9 +10,9 @@ about: Beeha Arsitektur adalah firma arsitektur yang mengutamakan desain
   hanya memenuhi kebutuhan klien, tetapi juga memberikan dampak positif terhadap
   komunitas dan lingkungan.
 teams:
-  - name: Rizal
-    role: Developer
-    pict: https://images.pexels.com/photos/31661325/pexels-photo-31661325/free-photo-of-confident-businessman-in-modern-office-setting.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+  - name: Bayu Perwira Linangdita
+    role: Principal Arsitek
+    pict: /uploads/img_20250318_004656_059.webp
   - name: Rusdi
     role: Designer
     pict: https://images.pexels.com/photos/31867225/pexels-photo-31867225/free-photo-of-elegant-man-in-tuxedo-sitting-in-indoor-garden.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
