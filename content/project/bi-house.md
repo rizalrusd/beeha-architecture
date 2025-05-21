@@ -1,12 +1,12 @@
 ---
-title: Bi House
+title: BI House
 date: 2025-04-12T07:48:52+07:00
 draft: false
 location: Yogyakarta, Daerah Istimewa Yogyakarta
 introduction: >
   BI House sebuah rumah tinggal yang berlokasi di pusat kota dengan beberapa
   pendekatan arsitektur modern. Dengan menggunakan material ekspose pada setiap
-  ruang 
+  ruang.
 main_task: "\n"
 images:
   - /images/houses/bi-house/01.jpg
